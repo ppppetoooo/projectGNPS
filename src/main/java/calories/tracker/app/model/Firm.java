@@ -18,57 +18,77 @@ public class Firm extends AbstractEntity {
     @ManyToOne
     private User user;
     
-    private Date date;
-    private Time time;
-    private String description;
-    private Long calories;
+    private String name;
+    private String address;
+    private String account_num;
+    private String ico;
+    private String dic;
+    private String ic_dph;
 
     public Firm() {
 
     }
 
-    public Firm(User user, Date date, Time time, String description, Long calories) {
+    public Firm(User user, String name, String address, String account_num, String ico, String dic, String ic_dph) {
         this.user = user;
-        this.date = date;
-        this.time = time;
-        this.description = description;
-        this.calories = calories;
+        this.name = name;
+        this.address = address;
+        this.account_num = account_num;
+        this.ico = ico;
+        this.dic = dic;
+        this.ic_dph = ic_dph;
     }
+    
+       
+    public String getName() {
+		return name;
+	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public Date getDate() {
-        return date;
-    }
+	public String getAddress() {
+		return address;
+	}
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-    public Time getTime() {
-        return time;
-    }
+	public String getAccount_num() {
+		return account_num;
+	}
 
-    public void setTime(Time time) {
-        this.time = time;
-    }
+	public void setAccount_num(String account_num) {
+		this.account_num = account_num;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public String getIco() {
+		return ico;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public void setIco(String ico) {
+		this.ico = ico;
+	}
 
-    public Long getCalories() {
-        return calories;
-    }
+	public String getDic() {
+		return dic;
+	}
 
-    public void setCalories(Long calories) {
-        this.calories = calories;
-    }
+	public void setDic(String dic) {
+		this.dic = dic;
+	}
 
-    public User getUser() {
+	public String getIc_dph() {
+		return ic_dph;
+	}
+
+	public void setIc_dph(String ic_dph) {
+		this.ic_dph = ic_dph;
+	}
+
+	public User getUser() {
         return user;
     }
 

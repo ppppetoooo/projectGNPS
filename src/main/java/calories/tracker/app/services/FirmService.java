@@ -86,37 +86,43 @@ public class FirmService {
      * saves a firm (new or not) into the database.
      *
      * @param username - - the currently logged in user
-     * @param id - the database ud of the firm
-     * @param date - the date the firm took place
-     * @param time - the time the firm took place
-     * @param description - the description of the firm
-     * @param calories - the calories of the firm
+     * @param id - the database id of the firm
+     * @param name - the name the firm took place
+     * @param address - the address the firm took place
+     * @param account_name - the account number of the firm
+     * @param ico - the ico of the firm
+     * @param dic - the dic of the firm
+     * @param ic_dph - the ic dph of the firm
      * @return - the new version of the firm
      */
 
     @Transactional
-    public Firm saveFirm(String username, Long id, Date date, Time time, String description, Long calories) {
+    public Firm saveFirm(String username, Long id, String name, String address, String account_num, String ico, String dic, String ic_dph) {
 
         assertNotBlank(username, "username cannot be blank");
-        notNull(date, "date is mandatory");
-        notNull(time, "time is mandatory");
-        notNull(description, "description is mandatory");
-        notNull(calories, "calories is mandatory");
+        notNull(name, "name is mandatory");
+        notNull(address, "address is mandatory");
+        notNull(account_num, "account number is mandatory");
+        notNull(ico, "ico is mandatory");
+        notNull(dic, "dic is mandatory");
+        notNull(ic_dph, "ic dph is mandatory");
 
         Firm firm = null;
 
         if (id != null) {
             firm = firmRepository.findFirmById(id);
-
-            firm.setDate(date);
-            firm.setTime(time);
-            firm.setDescription(description);
-            firm.setCalories(calories);
+            
+            firm.setName(name);
+            firm.setAddress(address);
+            firm.setAccount_num(account_num);
+            firm.setIco(ico);
+            firm.setDic(dic);
+            firm.setIc_dph(ic_dph);
         } else {
             User user = userRepository.findUserByUsername(username);
 
             if (user != null) {
-                firm = firmRepository.save(new Firm(user, date, time, description, calories));
+                firm = firmRepository.save(new Firm(user, name, address, account_num, ico, dic, ic_dph));
                 LOGGER.warn("A firm was attempted to be saved for a non-existing user: " + username);
             }
         }
@@ -138,10 +144,12 @@ public class FirmService {
                 .map((firm) -> saveFirm(
                         username,
                         firm.getId(),
-                        firm.getDate(),
-                        firm.getTime(),
-                        firm.getDescription(),
-                        firm.getCalories()))
+                        firm.getName(),
+                        firm.getAddress(),
+                        firm.getAccount_num(),
+                        firm.getIco(),
+                        firm.getDic(),
+                        firm.getIc_dph()))
                 .collect(Collectors.toList());
     }
 }
